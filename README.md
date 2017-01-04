@@ -16,5 +16,5 @@ The link syntax is exactly the same as referenced link syntax in **Markdown**, t
 All of the page path provided will be parsed relative to in which the page is stored. To go to the up level of the current page path, you can use `../` character:
 
 ~~~ .markdown
-[link:../blog/page-one] → will be replaced into `[Page Title](/directory/blog/page-one "Page Title")
+[link:../blog/page-one] → will be replaced into `[Page Title](/directory/blog/page-one "Page Title")`
 ~~~
