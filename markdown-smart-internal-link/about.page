@@ -12,8 +12,8 @@ This plugin will generate automatic link text and title attribute based on the p
 The link syntax is exactly the same as referenced link syntax in **Markdown**, the only difference is that you need to add a `link:` prefix to the reference ID:
 
 ~~~ .markdown
-[link:page-one] → will be replaced into `[Page Title](/directory/directory/page-one "Page Title")
-[link text][link:page-one] → will be replaced into `[link text](/directory/directory/page-one "Page Title")
+[link:page-one] → will be replaced into `[Page Title](/directory/directory/page-one "Page Title")`
+[link text][link:page-one] → will be replaced into `[link text](/directory/directory/page-one "Page Title")`
 [link:does-not-exist] → will be replaced into `<s style="color:#f00;" title="[link:does-not-exist]">link broken</s>`
 ~~~
 
