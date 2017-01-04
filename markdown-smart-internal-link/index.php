@@ -26,7 +26,7 @@ function fn_markdown_smart_internal_link($data) {
         $m[4] = isset($m[4]) ? $m[4] : "";
         $ff = To::path($p) . '.page';
         if (!file_exists($ff)) {
-            return HTML::s('&#x26A0; ' . $language->_message_exist($language->link), [
+            return HTML::s($language->link_broken, [
                 'title' => $m[0],
                 'css' => ['color' => '#f00']
             ]);
