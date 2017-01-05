@@ -23,4 +23,9 @@ All of the page path provided will be parsed relative to in which the page is st
 [link:../blog/page-one] → will be replaced into `[Page Title](/directory/blog/page-one "Page Title")`
 ~~~
 
+### Dependency
+
+ - **Plugin**
+   - Markdown Parser
+
 <!-- block:donate -->
