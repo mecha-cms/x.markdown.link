@@ -9,9 +9,11 @@ function fn_markdown_smart_internal_link($data) {
     global $language, $url;
     $links = "";
     $content = preg_replace_callback('#(?:\[(.*?)\])?\[link:((?:\.{2}/)*)([a-z\d/-]+?)([?&\#].*?)?\]#', function($m) use(&$links, $language, $url) {
-        // Remove the hook immediately to prevent infinity function nesting level
-        // Because `Page::get()` normally will also trigger the `page.input` hook(s)
-        Hook::reset('page.input', 'fn_markdown_smart_internal_link');
+        if (($i = explode('/', $url->path)) && is_numeric(end($i))) {
+            // Remove the hook immediately to prevent infinity function nesting level
+            // Because `Page::get()` normally will also trigger the `page.input` hook(s)
+            Hook::reset('page.input', 'fn_markdown_smart_internal_link');
+        }
         $pp = Path::D($url->path);
         if (!empty($m[2]) && ($i = substr_count($m[2], '../')) !== 0) {
             $pp = Path::D($pp, $i);
