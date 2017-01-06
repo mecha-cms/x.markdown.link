@@ -25,7 +25,8 @@ All of the page path provided will be parsed relative to in which the page is st
 
 ### Dependency
 
- - **Plugin**
-   - Markdown Parser
+#### Plugin
+
+ - Markdown Parser
 
 <!-- block:donate -->

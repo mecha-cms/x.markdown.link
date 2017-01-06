@@ -12,8 +12,3 @@ The link syntax is exactly the same as referenced link syntax in **Markdown**, t
 [link text][link:page-one] → will be replaced into `[link text](/directory/directory/page-one "Page Title")`
 [link:does-not-exist] → will be replaced into `<s style="color:#f00;" title="[link:does-not-exist]">link broken</s>`
 ~~~
-
-### Dependency
-
- - **Plugin**
-   - Markdown Parser
