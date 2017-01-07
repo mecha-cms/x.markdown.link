@@ -8,7 +8,7 @@ function fn_markdown_smart_internal_link($data) {
     if (strpos($content, '[link:') === false) return $data;
     global $language, $url;
     $links = "";
-    $content = preg_replace_callback('#(?:\[(.*?)\])?\[link:((?:\.{2}/)*)([a-z\d/-]+?)([?&\#].*?)?\]#', function($m) use(&$links, $language, $url) {
+    $content = preg_replace_callback('#(?:\[(.*?)\])?\[link:((?:\.{2}/)*)([a-z\d/-]*?)([?&\#].*?)?\]#', function($m) use(&$links, $language, $url) {
         if (($i = explode('/', $url->path)) && is_numeric(end($i))) {
             // Remove the hook immediately to prevent infinity function nesting level
             // Because `Page::get()` normally will also trigger the `page.input` hook(s)
@@ -27,7 +27,7 @@ function fn_markdown_smart_internal_link($data) {
         }
         $m[4] = isset($m[4]) ? $m[4] : "";
         $ff = To::path($p) . '.page';
-        if (!file_exists($ff)) {
+        if ($m[3] && !file_exists($ff)) {
             return HTML::s($language->link_broken, [
                 'title' => $m[0],
                 'css' => ['color' => '#f00']
@@ -35,9 +35,8 @@ function fn_markdown_smart_internal_link($data) {
         }
         $tt = Page::open($ff)->get('title', To::title(Path::B($m[2])));
         $ii = md5($m[3] . $m[4]) . '-' . str_replace('.', '-', microtime(true)); // Unique ID
-        $links .= "\n" . '[link:' . $ii . ']: ' . $url . $pp . '/' . To::url($m[3]) . $m[4] . ' "' . To::text($tt) . '"';
-        if (empty($m[1])) $m[1] = $tt;
-        return '[' . $m[1] . '][link:' . $ii . ']';
+        $links .= "\n" . '[link:' . $ii . ']: ' . ($m[3] ? $url . $pp . '/' . To::url($m[3]) . $m[4] . ' "' . To::text($tt) . '"' : $m[4]);
+        return '[' . ($m[1] ?: $tt) . '][link:' . $ii . ']';
     }, $content) . "\n" . $links;
     $data['content'] = $content;
     return $data;
