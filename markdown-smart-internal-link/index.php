@@ -1,19 +1,15 @@
 <?php
 
-function fn_markdown_smart_internal_link($data) {
-    if (!isset($data['content']) || !isset($data['type']) || $data['type'] !== 'Markdown') {
-        return $data;
+function fn_markdown_smart_internal_link($content, $lot) {
+    if (!isset($lot['type']) || $lot['type'] !== 'Markdown') {
+        return $content;
     }
-    $content = $data['content'];
-    if (strpos($content, '[link:') === false) return $data;
+    if (strpos($content, '[link:') === false) {
+        return $content;
+    }
     global $language, $url;
     $links = "";
-    $content = preg_replace_callback('#(?:\[(.*?)\])?\[link:((?:\.{2}/)*)([a-z\d/-]*?)([?&\#].*?)?\]#', function($m) use(&$links, $language, $url) {
-        if (($i = explode('/', $url->path)) && is_numeric(end($i))) {
-            // Remove the hook immediately to prevent infinity function nesting level
-            // Because `Page::get()` normally will also trigger the `page.input` hook(s)
-            Hook::reset('page.input', 'fn_markdown_smart_internal_link');
-        }
+    return preg_replace_callback('#(?:\[(.*?)\])?\[link:((?:\.{2}/)*)([a-z\d/-]*?)([?&\#].*?)?\]#', function($m) use(&$links, $language, $url) {
         $pp = Path::D($url->path);
         if (!empty($m[2]) && ($i = substr_count($m[2], '../')) !== 0) {
             $pp = Path::D($pp, $i);
@@ -33,13 +29,11 @@ function fn_markdown_smart_internal_link($data) {
                 'css' => ['color' => '#f00']
             ]);
         }
-        $tt = Page::open($ff)->get('title', To::title(Path::B($m[2])));
-        $ii = md5($m[3] . $m[4]) . '-' . str_replace('.', '-', microtime(true)); // Unique ID
-        $links .= "\n" . '[link:' . $ii . ']: ' . ($m[3] ? $url . $pp . '/' . To::url($m[3]) . $m[4] . ' "' . To::text($tt) . '"' : $m[4]);
-        return '[' . ($m[1] ?: $tt) . '][link:' . $ii . ']';
+        $title = Page::open($ff)->get('title', To::title(Path::B($m[2])));
+        $uid = md5($m[3] . $m[4]) . '-' . uniqid(); // Unique ID
+        $links .= "\n" . '[link:' . $uid . ']: ' . ($m[3] ? $url . $pp . '/' . To::url($m[3]) . $m[4] . ' "' . To::text($title) . '"' : $m[4]);
+        return '[' . ($m[1] ?: $title) . '][link:' . $uid . ']';
     }, $content) . "\n" . $links;
-    $data['content'] = $content;
-    return $data;
 }
 
-Hook::set('page.input', 'fn_markdown_smart_internal_link');
+Hook::set('page.content', 'fn_markdown_smart_internal_link', .9);
