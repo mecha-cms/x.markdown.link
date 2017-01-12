@@ -24,8 +24,8 @@ function fn_markdown_smart_internal_link($content, $lot) {
         $m[4] = isset($m[4]) ? $m[4] : "";
         $ff = To::path($p) . '.page';
         if ($m[3] && !file_exists($ff)) {
-            return HTML::s($language->link_broken, [
-                'title' => $m[0],
+            return HTML::s($m[1] ?: $language->link_broken, [
+                'title' => $m[1] ? $language->link_broken : $m[0],
                 'css' => ['color' => '#f00']
             ]);
         }
