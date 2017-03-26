@@ -30,10 +30,12 @@ function fn_markdown_smart_internal_link($content, $lot) {
                 'css' => ['color' => '#f00']
             ]);
         }
-        $title = Page::open($ff)->get('title', To::title(Path::B($m[2])));
+        $t = To::title(Path::B($m[2]));
+        $title = Page::open($ff)->get('title', $t);
+        $title_text = Page::open($ff, [], "")->get('title', $t);
         $uid = md5($m[3] . $m[4]) . '-' . uniqid(); // Unique ID
         $links .= "\n" . '[link:' . $uid . ']: ' . ($m[3] ? $url . $pp . '/' . To::url($m[3]) . $m[4] . ' "' . To::text($title) . '"' : $m[4]);
-        return '[' . ($m[1] ?: $title) . '][link:' . $uid . ']';
+        return '[' . ($m[1] ?: $title_text) . '][link:' . $uid . ']';
     }, $content) . "\n" . $links;
 }
 
