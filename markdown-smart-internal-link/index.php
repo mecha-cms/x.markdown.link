@@ -34,7 +34,7 @@ function fn_markdown_replace_link($content, $lot) {
         $title = Page::open($ff)->get('title', $t);
         $title_text = Page::open($ff, [], "")->get('title', $t);
         $uid = md5($m[3] . $m[4]) . '-' . uniqid(); // Unique ID
-        $links .= "\n" . '[link:' . $uid . ']: ' . ($m[3] ? $url . $pp . '/' . To::url($m[3]) . $m[4] . ' "' . To::text($title) . '"' : $m[4]);
+        $links .= "\n" . '[link:' . $uid . ']: ' . ($m[3] ? $url . To::url(strpos($m[3], '/') === 0 ? $m[3] : $pp . '/' . $m[3]) . $m[4] . ' "' . To::text($title) . '"' : $m[4]);
         return '[' . ($m[1] ?: $title_text) . '][link:' . $uid . ']';
     }, $content) . "\n" . $links;
 }
