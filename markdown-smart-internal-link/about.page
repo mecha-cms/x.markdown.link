@@ -4,6 +4,7 @@ description: Automatically search for internal links.
 author: Taufik Nurrohman
 type: Markdown
 version: 2.0.7
+dependency: {"plugin":["markdown"]}
 ...
 
 This plugin will generate automatic link text and title attribute based on the page path provided. If the page file you are trying to provide does not exist, this plugin will mark the automatic link with a red strikethrough text effect.
