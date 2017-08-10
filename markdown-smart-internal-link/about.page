@@ -3,7 +3,7 @@ title: Markdown Smart Internal Links
 description: Automatically search for internal links.
 author: Taufik Nurrohman
 type: Markdown
-version: 2.0.7
+version: 2.0.8
 dependency: {"plugin":["markdown"]}
 ...
 
@@ -24,11 +24,5 @@ All of the page path provided will be parsed relative to in which the page is st
 ~~~ .markdown
 [‌link:../blog/page-one‌] → will be replaced into `[Page Title](/directory/blog/page-one "Page Title")`
 ~~~
-
-### Dependency
-
-#### Plugin
-
- - Markdown Parser
 
 <!-- block:donate -->
