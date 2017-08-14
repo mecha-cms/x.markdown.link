@@ -7,13 +7,10 @@ function fn_markdown_replace_link($content, $lot) {
     if (strpos($content, '[link:') === false) {
         return $content;
     }
-    global $language, $site, $url;
+    global $language, $url;
     $links = "";
-    return preg_replace_callback('#(?:\[(.*?)\])?\[link:((?:\.{2}/)*)([a-z\d/-]*?)([?&\#].*?)?\]#', function($m) use(&$links, $language, $site, $url) {
-        $u = $url->path;
-        if ($site->is === 'page') {
-            $u = Path::D($u);
-        }
+    return preg_replace_callback('#(?:\[(.*?)\])?\[link:((?:\.{2}/)*)([a-z\d/-]*?)([?&\#].*?)?\]#', function($m) use(&$links, $language, $lot, $url) {
+        $u = str_replace([PAGE . DS, DS], ["", '/'], dirname($lot['path']));
         if (!empty($m[2]) && ($i = substr_count($m[2], '../')) !== 0) {
             $u = Path::D($u, $i);
             $m[2] = str_replace('../', "", $m[2]);
