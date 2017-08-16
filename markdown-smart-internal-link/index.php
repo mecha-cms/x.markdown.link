@@ -29,7 +29,7 @@ function fn_markdown_replace_link($content, $lot) {
             $p . '.archive'
         ]);
         if ($m[3] && !$f) {
-            Hook::fire('on.' . basename(__DIR__) . '.x', [$m]);
+            Hook::fire('on.' . basename(__DIR__) . '.x', [$url->current, $lot, $m]);
             return HTML::s($m[1] ?: $language->link_broken, [
                 'title' => $m[1] ? $language->link_broken : $m[0],
                 'css' => ['color' => '#f00']
