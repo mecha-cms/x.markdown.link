@@ -1,6 +1,6 @@
 <?php
 
-function fn_markdown_replace_link($content, $lot) {
+function fn_markdown_link($content, $lot) {
     if (!isset($lot['type']) || $lot['type'] !== 'Markdown') {
         return $content;
     }
@@ -44,4 +44,4 @@ function fn_markdown_replace_link($content, $lot) {
     }, $content) . "\n" . $links;
 }
 
-Hook::set(['page.content', 'page.description'], 'fn_markdown_replace_link', 1.9);
+Hook::set(['page.content', 'page.description'], 'fn_markdown_link', 1.9);
