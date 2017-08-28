@@ -27,7 +27,7 @@ function fn_markdown_link($content, $lot) {
         $f = File::exist([
             $p . '.page',
             $p . '.archive'
-        ]);
+        ], null);
         if ($m[3] && !$f) {
             Hook::fire('on.' . basename(__DIR__) . '.x', [$url->current, $lot, $m]);
             return HTML::s($m[1] ?: $language->link_broken, [
@@ -37,7 +37,7 @@ function fn_markdown_link($content, $lot) {
         }
         $t = To::title(Path::B($m[2]));
         $title = Page::open($f)->get('title', $t);
-        $title_text = Page::apart(file_get_contents($f), 'title', $t);
+        $title_text = is_file($f) ? Page::apart(file_get_contents($f), 'title', $t) : $t;
         $id = md5($m[3] . $m[4]) . '-' . uniqid(); // Unique ID
         $links .= "\n" . '[link:' . $id . ']: ' . ($m[3] ? $url . To::url(strpos($m[3], '/') === 0 ? $m[3] : $u . '/' . $m[3]) . $m[4] . ' "' . To::text($title) . '"' : $m[4]);
         return '[' . ($m[1] ?: $title_text) . '][link:' . $id . ']';

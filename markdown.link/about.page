@@ -3,7 +3,7 @@ title: Markdown Smart Internal Links
 description: Automatically search for internal links.
 author: Taufik Nurrohman
 type: Markdown
-version: 2.0.10
+version: 2.0.11
 dependency: {"plugin":["markdown"]}
 ...
 
