@@ -44,4 +44,4 @@ function fn_markdown_link($content, $lot) {
     }, $content) . "\n" . $links;
 }
 
-Hook::set(['page.content', 'page.description'], 'fn_markdown_link', 1.9);
+Hook::set(['*.content', '*.description'], 'fn_markdown_link', 1.9);
