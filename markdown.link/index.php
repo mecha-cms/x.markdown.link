@@ -10,6 +10,9 @@ function fn_markdown_link($content, $lot) {
     global $language, $url;
     $links = "";
     return preg_replace_callback('#(?:\[(.*?)\])?\[link:((?:\.{2}/)*|\.{2})([a-z\d/-]*?)([?&\#].*?)?\]#', function($m) use(&$links, $language, $lot, $url) {
+        if (!isset($lot['path'])) {
+            return $m[0];
+        }
         $u = rtrim(str_replace(PAGE . DS, "", dirname($lot['path']) . DS), DS);
         if (!empty($m[2])) {
             if ($m[2] === '..' && empty($m[3])) {
