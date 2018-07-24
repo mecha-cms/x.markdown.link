@@ -1,7 +1,7 @@
 <?php
 
-function fn_markdown_link($content, $lot) {
-    if (!isset($lot['type']) || $lot['type'] !== 'Markdown') {
+function fn_markdown_link($content, $lot = [], $that) {
+    if ($that->get('type') !== 'Markdown') {
         return $content;
     }
     if (strpos($content, '[link:') === false) {
@@ -9,7 +9,7 @@ function fn_markdown_link($content, $lot) {
     }
     global $language, $url;
     $links = "";
-    return preg_replace_callback('#(?:\[(.*?)\])?\[link:((?:\.{2}/)*|\.{2})([a-z\d/-]*?)([?&\#].*?)?\]#', function($m) use(&$links, $language, $lot, $url) {
+    return preg_replace_callback('#(?:\[(.*?)\])?\[link:((?:\.{2}/)*|\.{2})([\w/-]*?)([?&\#].*?)?\]#', function($m) use(&$links, $language, $lot, $url) {
         if (!isset($lot['path'])) {
             return $m[0];
         }
@@ -47,7 +47,7 @@ function fn_markdown_link($content, $lot) {
         $title = Page::open($f)->get('title', $t);
         $title_text = is_file($f) ? Page::apart(file_get_contents($f), 'title', $t) : $t;
         $id = md5($m[3] . $m[4]) . '-' . uniqid(); // Unique ID
-        $links .= "\n" . '[link:' . $id . ']: ' . ($m[3] ? $url . To::url(strpos($m[3], '/') === 0 ? $m[3] : $u . '/' . $m[3]) . $m[4] . ' "' . To::text($title) . '"' : $url . To::url($u) . $m[4]);
+        $links .= "\n" . '[link:' . $id . ']: ' . ($m[3] ? $url . To::URL(strpos($m[3], '/') === 0 ? $m[3] : $u . '/' . $m[3]) . $m[4] . ' "' . To::text($title) . '"' : $url . To::URL($u) . $m[4]);
         return '[' . ($m[1] ?: $title_text) . '][link:' . $id . ']';
     }, $content) . "\n" . $links;
 }
