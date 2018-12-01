@@ -51,4 +51,4 @@ function link($content = "", array $lot = []) {
     }, $content);
 }
 
-\Hook::set(['*.content', '*.description'], __NAMESPACE__ . '\link', 1.9);
+\Hook::set(['*.content', '*.description'], __NAMESPACE__ . "\\link", 1.9); // Make sure to run before `fn\markdown` hook
