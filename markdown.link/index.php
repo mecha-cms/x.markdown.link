@@ -8,7 +8,7 @@ function link($content = "", array $lot = []) {
         return $content;
     }
     global $language, $url;
-    return preg_replace_callback('#(?:\[(.*?)\])?\[link:((?:\.{2}/)*|\.{2})([\w/-]*?)([?&\#].*?)?\]#', function($m) use($language, $lot, $url) {
+    return preg_replace_callback('#(?:\[([^][]*?)\])?\[link:((?:\.{2}/)*|\.{2})([\w/-]*?)([?&\#].*?)?\]#', function($m) use($language, $lot, $url) {
         if (!$path = $this->path) {
             return $m[0];
         }
