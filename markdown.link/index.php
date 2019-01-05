@@ -43,11 +43,11 @@ function link($content = "", array $lot = []) {
             ]);
         }
         $t = \To::title(\Path::B($m[2]));
-        $title = \Page::open($f)->get('title', $t);
-        $title_text = is_file($f) ? \Page::apart($f, 'title', $t) : $t;
+        $p = new \Page($f);
+        $title = $p->get('title', $t);
         $id = md5($m[3] . $m[4]) . '-' . uniqid(); // Unique ID
         $u = $m[3] ? $url . \To::URL(strpos($m[3], '/') === 0 ? $m[3] : $u . '/' . $m[3]) . $m[4] . ' "' . \To::text($title) . '"' : $url . \To::URL($u) . $m[4];
-        return '[' . ($m[1] ?: $title_text) . '](' . $u . ')';
+        return '[' . ($m[1] ?: $title) . '](' . $u . ')';
     }, $content);
 }
 
