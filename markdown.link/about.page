@@ -3,11 +3,11 @@ title: Markdown Smart Internal Links
 description: Automatically search for internal links.
 author: Taufik Nurrohman
 type: Markdown
-version: 2.3.2
+version: 2.3.3
 
 dependency:
   plugin:
-    - markdown
+  - markdown
 ...
 
 This plugin will generate automatic link text and title attribute based on the page path provided. If the page file you are trying to provide does not exist, this plugin will mark the automatic link with a red strikethrough text effect.
