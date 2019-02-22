@@ -17,7 +17,7 @@ function link($content = "", array $lot = []) {
             if ($m[2] === '..' && empty($m[3])) {
                 $u = \Path::D($u);
                 $m[2] = "";
-            } else if (($i = \substr_count($m[2], '../')) !== 0) {
+            } else if (0 !== ($i = \substr_count($m[2], '../'))) {
                 $u = \Path::D($u, $i);
                 $m[2] = \str_replace('../', "", $m[2]);
             }
