@@ -1,7 +1,7 @@
 <?php namespace fn\markdown;
 
 function link($content = "", array $lot = []) {
-    if ($this->type !== 'Markdown') {
+    if ($this['type'] !== 'Markdown') {
         return $content;
     }
     if (\strpos($content, '[link:') === false) {
@@ -37,10 +37,7 @@ function link($content = "", array $lot = []) {
         ], null);
         if ($m[3] && !$f) {
             \Hook::fire('on.' . \basename(__DIR__) . '.x', [$m, $lot], $this);
-            return \HTML::s($m[1] ?: $language->link_broken, [
-                'title' => $m[1] ? $language->link_broken : $m[0],
-                'style[]' => ['color' => '#f00']
-            ]);
+            return '<s title="' . ($m[1] ? $language->link_broken : $m[0]) . '" style="color:#f00;">' . ($m[1] ?: $language->link_broken) . '</s>';
         }
         $t = \To::title(\Path::B($m[2]));
         $p = new \Page($f);
