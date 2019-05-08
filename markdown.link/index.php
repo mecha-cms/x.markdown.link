@@ -1,4 +1,4 @@
-<?php namespace fn\markdown;
+<?php namespace _\markdown;
 
 function link($content = "", array $lot = []) {
     if ($this['type'] !== 'Markdown') {
@@ -37,9 +37,9 @@ function link($content = "", array $lot = []) {
         ], null);
         if ($m[3] && !$f) {
             \Hook::fire('on.' . \basename(__DIR__) . '.x', [$m, $lot], $this);
-            return '<s title="' . ($m[1] ? $language->link_broken : $m[0]) . '" style="color:#f00;">' . ($m[1] ?: $language->link_broken) . '</s>';
+            return '<s title="' . ($m[1] ? $language->linkBroken : $m[0]) . '" style="color:#f00;">' . ($m[1] ?: $language->linkBroken) . '</s>';
         }
-        $t = \To::title(\Path::B($m[2]));
+        $t = \To::title(\Path::B($m[2]) . "");
         $p = new \Page($f);
         $title = $p->get('title', $t);
         $id = \md5($m[3] . $m[4]) . '-' . \uniqid(); // Unique ID
@@ -48,4 +48,5 @@ function link($content = "", array $lot = []) {
     }, $content);
 }
 
-\Hook::set(['*.content', '*.description'], __NAMESPACE__ . "\\link", 1.9); // Make sure to run before `fn\markdown` hook
+\Hook::set(['*.content', '*.description'], __NAMESPACE__ . "\\link", 1.9); // Make sure to run before `_\markdown` hook
+\Language::set('link-broken', 'broken link');
