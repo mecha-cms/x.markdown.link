@@ -5,9 +5,10 @@ author: Taufik Nurrohman
 type: Markdown
 version: 2.4.0
 
-dependency:
-  plugin:
-  - markdown
+lot:
+  extend:
+    plugin:
+      markdown: 1
 ...
 
 This plugin will generate automatic link text and title attribute based on the page path provided. If the page file you are trying to provide does not exist, this plugin will mark the automatic link with a red strikethrough text effect.
