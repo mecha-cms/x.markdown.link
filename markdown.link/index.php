@@ -39,7 +39,7 @@ function link($content = "", array $lot = []) {
             \Hook::fire('on.' . \basename(__DIR__) . '.x', [$m, $lot], $this);
             return '<s title="' . ($m[1] ? $language->linkBroken : $m[0]) . '" style="color:#f00;">' . ($m[1] ?: $language->linkBroken) . '</s>';
         }
-        $t = \To::title(\Path::B($m[2]) . "");
+        $t = \To::title((string) \Path::B($m[2]));
         $p = new \Page($f);
         $title = $p->get('title', $t);
         $id = \md5($m[3] . $m[4]) . '-' . \uniqid(); // Unique ID
