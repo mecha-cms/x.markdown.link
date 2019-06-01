@@ -43,7 +43,7 @@ function link($content = "", array $lot = []) {
         $p = new \Page($f);
         $title = $p->get('title', $t);
         $id = \md5($m[3] . $m[4]) . '-' . \uniqid(); // Unique ID
-        $u = $m[3] ? $url . \To::URL(\strpos($m[3], '/') === 0 ? $m[3] : $u . '/' . $m[3]) . $m[4] . ' "' . \To::text($title) . '"' : $url . \To::URL($u) . $m[4];
+        $u = $m[3] ? $url . \To::URL(\strpos($m[3], '/') === 0 ? $m[3] : $u . $m[3]) . $m[4] . ' "' . \To::text($title) . '"' : $url . \To::URL($u) . $m[4];
         return '[' . ($m[1] ?: $title) . '](' . $u . ')';
     }, $content);
 }
