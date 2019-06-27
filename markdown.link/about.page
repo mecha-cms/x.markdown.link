@@ -6,7 +6,7 @@ type: Markdown
 version: 2.4.1
 
 lot:
-  extend:
+  x:
     plugin:
       markdown: 1
 ...
