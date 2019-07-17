@@ -1,7 +1,7 @@
-Markdown Smart Internal Links Plugin for Mecha
-==============================================
+Markdown Smart Internal Links Extension for Mecha
+=================================================
 
-This plugin will generate automatic link text and title attribute based on the page path provided. If the page file you are trying to provide does not exist, this plugin will mark the automatic link with a red strikethrough text effect.
+This extension will generate automatic link text and title attribute based on the page path provided. If the page file you are trying to provide does not exist, this extension will mark the automatic link with a red strikethrough text effect.
 
 ### Usage
 
