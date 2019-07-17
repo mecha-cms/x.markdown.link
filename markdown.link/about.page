@@ -3,15 +3,14 @@ title: Markdown Smart Internal Links
 description: Automatically search for internal links.
 author: Taufik Nurrohman
 type: Markdown
-version: 2.4.1
+version: 2.4.3
 
-lot:
-  x:
-    plugin:
-      markdown: 1
+use:
+  '.\lot\x\page': 1
+  '.\lot\x\markdown': 1
 ...
 
-This plugin will generate automatic link text and title attribute based on the page path provided. If the page file you are trying to provide does not exist, this plugin will mark the automatic link with a red strikethrough text effect.
+This extension will generate automatic link text and title attribute based on the page path provided. If the page file you are trying to provide does not exist, this extension will mark the automatic link with a red strikethrough text effect.
 
 ### Usage
 
@@ -20,10 +19,10 @@ The link syntax is exactly the same as referenced link syntax in **Markdown**, t
 ~~~ .markdown
 [‌link:page-one‌] → will be replaced into `[Page Title](/directory/directory/page-one "Page Title")`
 [‌link text‌][‌link:page-one‌] → will be replaced into `[link text](/directory/directory/page-one "Page Title")`
-[‌link:does-not-exist‌] → will be replaced into `<s style="color:#f00;" title="[‌link:does-not-exist‌]">link broken</s>`
+[‌link:does-not-exist‌] → will be replaced into `<s style="color:#f00;" title="[‌link:does-not-exist‌]">broken link</s>`
 ~~~
 
-All of the page path provided will be parsed relative to in which the page is stored. To go to the up level of the current page path, you can use `../` pattern:
+All of the page path provided will be parsed relative to in which the page is stored. To go to the upper level of the current page path, you can use `../` pattern:
 
 ~~~ .markdown
 [‌link:../blog/page-one‌] → will be replaced into `[Page Title](/directory/blog/page-one "Page Title")`
