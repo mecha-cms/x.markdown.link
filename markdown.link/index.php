@@ -1,7 +1,8 @@
 <?php namespace _\lot\x\markdown;
 
 function link($content = "", array $lot = []) {
-    if ($this['type'] !== 'Markdown') {
+    $type = $this['type'];
+    if ($type !== 'Markdown' && $type !== 'text/markdown') {
         return $content;
     }
     if (\strpos($content, '[link:') === false) {
