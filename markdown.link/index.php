@@ -13,7 +13,7 @@ function link($content = "", array $lot = []) {
         if (!$path = $this->path) {
             return $m[0];
         }
-        $u = \rtrim(\str_replace(PAGE . DS, "", \dirname($path) . DS), DS);
+        $u = \rtrim(\str_replace(\PAGE . \DS, "", \dirname($path) . \DS), \DS);
         if (!empty($m[2])) {
             if ($m[2] === '..' && empty($m[3])) {
                 $u = \dirname($u);
@@ -28,9 +28,9 @@ function link($content = "", array $lot = []) {
             $u = '/' . $u;
         }
         if (empty($m[2]) && \strpos($m[3], '/') === 0) {
-            $p = PAGE . $m[3];
+            $p = \PAGE . $m[3];
         } else {
-            $p = PAGE . $u . DS . $m[3];
+            $p = \PAGE . $u . \DS . $m[3];
         }
         $m[4] = isset($m[4]) ? $m[4] : "";
         $f = \File::exist([
@@ -45,7 +45,7 @@ function link($content = "", array $lot = []) {
         $p = new \Page($f);
         $title = $p->title ?? $t;
         $id = \md5($m[3] . $m[4]) . '-' . \uniqid(); // Unique ID
-        $u = \strtr($m[3] ? $url . (\strpos($m[3], '/') === 0 ? $m[3] : $u . '/' . $m[3]) . $m[4] . ' "' . \To::text($title) . '"' : $url . $u . $m[4], DS, '/');
+        $u = \strtr($m[3] ? $url . (\strpos($m[3], '/') === 0 ? $m[3] : $u . '/' . $m[3]) . $m[4] . ' "' . \To::text($title) . '"' : $url . $u . $m[4], \DS, '/');
         return '[' . ($m[1] ?: $title) . '](' . $u . ')';
     }, $content);
 }
