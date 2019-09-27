@@ -38,7 +38,6 @@ function link($content = "", array $lot = []) {
             $p . '.archive'
         ]);
         if ($m[3] && !$f) {
-            \Hook::fire('on.markdown.link.x', [$m, $lot], $this);
             return '<s title="' . ($m[1] ? $language->linkIsBroken : $m[0]) . '" style="color:#f00;">' . ($m[1] ?: $language->linkIsBroken) . '</s>';
         }
         $t = \To::title(\basename($m[2]));
