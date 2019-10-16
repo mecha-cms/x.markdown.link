@@ -8,8 +8,8 @@ function link($content = "", array $lot = []) {
     if (\strpos($content, '[link:') === false) {
         return $content;
     }
-    global $language, $url;
-    return \preg_replace_callback('/(?:\[([^]]*)\])?\[link:((?:\.{2}\/)*|\.{2})([^\s?&#]*)([?&#].*)?\]/', function($m) use($language, $lot, $url) {
+    global $url;
+    return \preg_replace_callback('/(?:\[([^]]*)\])?\[link:((?:\.{2}\/)*|\.{2})([^\s?&#]*)([?&#].*)?\]/', function($m) use($lot, $url) {
         if (!$path = $this->path) {
             return $m[0];
         }
@@ -38,7 +38,7 @@ function link($content = "", array $lot = []) {
             $p . '.archive'
         ]);
         if ($m[3] && !$f) {
-            return '<s title="' . ($m[1] ? $language->linkIsBroken : $m[0]) . '" style="color:#f00;">' . ($m[1] ?: $language->linkIsBroken) . '</s>';
+            return '<s title="' . ($m[1] ? \i('broken link') : $m[0]) . '" style="color:#f00;">' . ($m[1] ?: \i('broken link')) . '</s>';
         }
         $t = \To::title(\basename($m[2]));
         $p = new \Page($f);
@@ -53,5 +53,3 @@ function link($content = "", array $lot = []) {
     'page.content',
     'page.description'
 ], __NAMESPACE__ . "\\link", 1.9); // Make sure to run before `_\lot\x\markdown` hook
-
-\Language::set('link-is-broken', 'broken link');
