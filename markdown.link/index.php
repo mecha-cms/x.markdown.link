@@ -2,10 +2,10 @@
 
 function link($content = "", array $lot = []) {
     $type = $this->type;
-    if ($type !== 'Markdown' && $type !== 'text/markdown') {
+    if ('Markdown' !== $type && 'text/markdown' !== $type) {
         return $content;
     }
-    if (\strpos($content, '[link:') === false) {
+    if (false === \strpos($content, '[link:')) {
         return $content;
     }
     global $url;
@@ -15,7 +15,7 @@ function link($content = "", array $lot = []) {
         }
         $u = \rtrim(\str_replace(\PAGE . \DS, "", \dirname($path) . \DS), \DS);
         if (!empty($m[2])) {
-            if ($m[2] === '..' && empty($m[3])) {
+            if ('..' === $m[2] && empty($m[3])) {
                 $u = \dirname($u);
                 $m[2] = "";
             } else if (0 !== ($i = \substr_count($m[2], '../'))) {
@@ -23,11 +23,11 @@ function link($content = "", array $lot = []) {
                 $m[2] = \str_replace('../', "", $m[2]);
             }
         }
-        $u = $u === '.' ? "" : $u;
-        if ($u !== "") {
+        $u = '.' === $u ? "" : $u;
+        if ("" !== $u) {
             $u = '/' . $u;
         }
-        if (empty($m[2]) && \strpos($m[3], '/') === 0) {
+        if (empty($m[2]) && 0 === \strpos($m[3], '/')) {
             $p = \PAGE . $m[3];
         } else {
             $p = \PAGE . $u . \DS . $m[3];
@@ -44,7 +44,7 @@ function link($content = "", array $lot = []) {
         $p = new \Page($f);
         $title = $p->title ?? $t;
         $id = \md5($m[3] . $m[4]) . '-' . \uniqid(); // Unique ID
-        $u = \strtr($m[3] ? $url . (\strpos($m[3], '/') === 0 ? $m[3] : $u . '/' . $m[3]) . $m[4] . ' "' . \To::text($title) . '"' : $url . $u . $m[4], \DS, '/');
+        $u = \strtr($m[3] ? $url . (0 === \strpos($m[3], '/') ? $m[3] : $u . '/' . $m[3]) . $m[4] . ' "' . \To::text($title) . '"' : $url . $u . $m[4], \DS, '/');
         return '[' . ($m[1] ?: $title) . '](' . $u . ')';
     }, $content);
 }
