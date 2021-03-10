@@ -3,7 +3,7 @@ title: Markdown Smart Internal Links
 description: Automatically search for internal links.
 author: Taufik Nurrohman
 type: Markdown
-version: 2.4.4
+version: 2.4.5
 
 use:
   '.\lot\x\markdown': 1
@@ -17,8 +17,8 @@ This extension will generate automatic link text and title attribute based on th
 The link syntax is exactly the same as referenced link syntax in Markdown, the only difference is that you need to add a `link:` prefix to the reference ID:
 
 ~~~ .markdown
-[‌link:page-one] → will be replaced with `[Page Title](http://127.0.0.1/path/to/page-one "Page Title")`
-[‌link text‌][‌link:page-one] → will be replaced with `[link text](http://127.0.0.1/path/to/page-one "Page Title")`
+[‌link:page-one‌] → will be replaced with `[Page Title](http://127.0.0.1/path/to/page-one "Page Title")`
+[‌link text‌][‌link:page-one‌] → will be replaced with `[link text](http://127.0.0.1/path/to/page-one "Page Title")`
 [‌link:does-not-exist‌] → will be replaced with `<s style="color:#f00;" title="[‌link:does-not-exist‌]">broken link</s>`
 ~~~
 

@@ -1,6 +1,6 @@
-<?php namespace _\lot\x\markdown;
+<?php namespace x;
 
-function link($content = "", array $lot = []) {
+function markdown__link($content = "", array $lot = []) {
     $type = $this->type;
     if ('Markdown' !== $type && 'text/markdown' !== $type) {
         return $content;
@@ -52,4 +52,4 @@ function link($content = "", array $lot = []) {
 \Hook::set([
     'page.content',
     'page.description'
-], __NAMESPACE__ . "\\link", 1.9); // Make sure to run before `_\lot\x\markdown` hook
+], __NAMESPACE__ . "\\markdown__link", 1.9); // Make sure to run before `x\markdown` hook

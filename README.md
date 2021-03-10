@@ -12,3 +12,10 @@ The link syntax is exactly the same as referenced link syntax in **Markdown**, t
 [link text][link:page-one] → will be replaced into `[link text](/directory/directory/page-one "Page Title")`
 [link:does-not-exist] → will be replaced into `<s style="color:#f00;" title="[link:does-not-exist]">link broken</s>`
 ~~~
+
+Release Notes
+-------------
+
+### main
+
+ - [x] [@mecha-cms/mecha#96](https://github.com/mecha-cms/mecha/issues/96)
