@@ -16,6 +16,6 @@ The link syntax is exactly the same as referenced link syntax in **Markdown**, t
 Release Notes
 -------------
 
-### main
+### 2.4.5
 
- - [x] [@mecha-cms/mecha#96](https://github.com/mecha-cms/mecha/issues/96)
+ - [@mecha-cms/mecha#96](https://github.com/mecha-cms/mecha/issues/96)

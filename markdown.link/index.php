@@ -34,11 +34,11 @@ function markdown__link($content = "", array $lot = []) {
         }
         $m[4] = isset($m[4]) ? $m[4] : "";
         $f = \File::exist([
-            $p . '.page',
-            $p . '.archive'
+            $p . '.archive',
+            $p . '.page'
         ]);
         if ($m[3] && !$f) {
-            return '<s title="' . ($m[1] ? \i('broken link') : $m[0]) . '" style="color:#f00;">' . ($m[1] ?: \i('broken link')) . '</s>';
+            return '<s title="' . ($m[1] ? \i('broken link') : $m[0]) . '" style="color: #f00;">' . ($m[1] ?: \i('broken link')) . '</s>';
         }
         $t = \To::title(\basename($m[2]));
         $p = new \Page($f);
