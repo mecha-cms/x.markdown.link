@@ -1,19 +1,20 @@
 <?php namespace x;
 
 function markdown__link($content = "", array $lot = []) {
+    $path = $this->path;
     $type = $this->type;
+    if (!$path) {
+        return $content;
+    }
     if ('Markdown' !== $type && 'text/markdown' !== $type) {
         return $content;
     }
     if (false === \strpos($content, '[link:')) {
         return $content;
     }
-    global $url;
-    return \preg_replace_callback('/(?:\[([^]]*)\])?\[link:((?:\.{2}\/)*|\.{2})([^\s?&#]*)([?&#].*)?\]/', function($m) use($lot, $url) {
-        if (!$path = $this->path) {
-            return $m[0];
-        }
-        $u = \rtrim(\str_replace(\LOT . \DS . 'page' . \DS, "", \dirname($path) . \DS), \DS);
+    extract($GLOBALS, \EXTR_SKIP);
+    return \preg_replace_callback('/(?:\[([^]]*)\])?\[link:((?:\.{2}\/)*|\.{2})([^\s?&#]*)([?&#].*)?\]/', function($m) use($lot, $path, $url) {
+        $u = \rtrim(\strtr(\dirname($path) . \DS, [\LOT . \DS . 'page' . \DS => ""]), \DS);
         if (!empty($m[2])) {
             if ('..' === $m[2] && empty($m[3])) {
                 $u = \dirname($u);
