@@ -1,6 +1,8 @@
 Markdown Smart Internal Links Extension for [Mecha](https://github.com/mecha-cms/mecha)
 =======================================================================================
 
+![Code Size](https://img.shields.io/github/languages/code-size/mecha-cms/x.markdown.link?color=%23444&style=for-the-badge)
+
 This extension will generate automatic link text and title attribute based on the page path provided. If the page file you are trying to provide does not exist, this extension will mark the automatic link with a red strikethrough text effect.
 
 ---
