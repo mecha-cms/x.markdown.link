@@ -1,52 +1,51 @@
 <?php namespace x;
 
-function markdown__link($content = "", array $lot = []) {
+function markdown__link($content) {
     $path = $this->path;
-    $type = $this->type;
     if (!$path) {
         return $content;
     }
+    $type = $this->type;
     if ('Markdown' !== $type && 'text/markdown' !== $type) {
         return $content;
     }
     if (false === \strpos($content, '[link:')) {
         return $content;
     }
-    extract($GLOBALS, \EXTR_SKIP);
-    return \preg_replace_callback('/(?:\[([^]]*)\])?\[link:((?:\.{2}\/)*|\.{2})([^\s?&#]*)([?&#].*)?\]/', function($m) use($lot, $path, $url) {
-        $u = \rtrim(\strtr(\dirname($path) . \DS, [\LOT . \DS . 'page' . \DS => ""]), \DS);
+    \extract($GLOBALS, \EXTR_SKIP);
+    return \preg_replace_callback('/(?:\[([^]]*)\])?\[link:((?:\.{2}\/)*|\.{2})([^\s?&#]*)([?&#].*?)?\]/', static function($m) use($path, $url) {
+        $route = \rtrim(\strtr(\dirname($path) . \D, [
+            \LOT . \D . 'page' . \D => ""
+        ]), \D);
         if (!empty($m[2])) {
             if ('..' === $m[2] && empty($m[3])) {
-                $u = \dirname($u);
+                $route = \dirname($route);
                 $m[2] = "";
-            } else if (0 !== ($i = \substr_count($m[2], '../'))) {
-                $u = \dirname($u, $i);
-                $m[2] = \str_replace('../', "", $m[2]);
+            } else if (0 !== ($deep = \substr_count($m[2], '../'))) {
+                $route = \dirname($route, $deep);
+                $m[2] = \strtr($m[2], [
+                    '../' => ""
+                ]);
             }
         }
-        $u = '.' === $u ? "" : $u;
-        if ("" !== $u) {
-            $u = '/' . $u;
-        }
+        $route = "" === $route || '.' === $route ? "" : '/' . $route;
         if (empty($m[2]) && 0 === \strpos($m[3], '/')) {
-            $p = \LOT . \DS . 'page' . $m[3];
+            $folder = \LOT . \D . 'page' . \strtr($m[3], '/', \D);
         } else {
-            $p = \LOT . \DS . 'page' . $u . \DS . $m[3];
+            $folder = \LOT . \D . 'page' . \strtr($route . \D . $m[3], '/', D);
         }
-        $m[4] = isset($m[4]) ? $m[4] : "";
-        $f = \File::exist([
-            $p . '.archive',
-            $p . '.page'
-        ]);
-        if ($m[3] && !$f) {
-            return '<s title="' . ($m[1] ? \i('broken link') : $m[0]) . '" style="color: #f00;">' . ($m[1] ?: \i('broken link')) . '</s>';
+        $m[4] = $m[4] ?? ""; // This is the query string and hash
+        $file = \exist([
+            $folder . '.archive',
+            $folder . '.page'
+        ], 1);
+        if ($m[3] && !$file) {
+            return '<s role="status" style="color: #f00;" title="' . ($m[1] ? \i('broken link') : $m[0]) . '">' . ($m[1] ?: \i('broken link')) . '</s>';
         }
-        $t = \To::title(\basename($m[2]));
-        $p = new \Page($f);
-        $title = $p->title ?? $t;
-        $id = \md5($m[3] . $m[4]) . '-' . \uniqid(); // Unique ID
-        $u = \strtr($m[3] ? $url . (0 === \strpos($m[3], '/') ? $m[3] : $u . '/' . $m[3]) . $m[4] . ' "' . \To::text($title) . '"' : $url . $u . $m[4], \DS, '/');
-        return '[' . ($m[1] ?: $title) . '](' . $u . ')';
+        $page = new \Page($file);
+        $title = $page->title ?? \To::title(\basename($m[2]));
+        $v = \strtr($m[3] ? $url . (0 === \strpos($m[3], '/') ? $m[3] : $route . '/' . $m[3]) . $m[4] . ' "' . \To::text($title) . '"' : $url . $route . $m[4], \D, '/');
+        return '[' . ($m[1] ?: $title) . '](' . $v . ')';
     }, $content);
 }
 

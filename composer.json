@@ -1,0 +1,10 @@
+{
+  "abandoned": true,
+  "description": "Automatically search for internal links.",
+  "license": "GPL-3.0-or-later",
+  "name": "mecha-cms/x.markdown.link",
+  "require": {
+    "mecha-cms/x.markdown": "^3.0.0",
+    "mecha-cms/x.page": "^2.0.0"
+  }
+}

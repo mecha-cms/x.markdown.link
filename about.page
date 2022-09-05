@@ -1,29 +1,29 @@
 ---
 title: Markdown Smart Internal Links
 description: Automatically search for internal links.
+icon: ''
 author: Taufik Nurrohman
 type: Markdown
-version: 2.4.5
+version: 2.4.6
+alert:
+  stale:
+  - 'This extension is considered obsolete. I recommend you to just use the [Link](https://github.com/mecha-cms/x.link) extension which is more natural and will keep the page data clean even though this extension will be removed eventually when you don’t need it. This extension last updated and known to be compatible with core version 3.0.0. After that, I do not guarantee that I will continue to update this extension. Contributors and users who still consider this extension as a necessary extension are welcome to [update this extension](https://github.com/mecha-cms/x.markdown.link) so that it will remain compatible with newer core versions.'
 
 use:
   '.\lot\x\markdown': 1
   '.\lot\x\page': 1
 ...
 
-This extension will generate automatic link text and title attribute based on the page path provided. If the page file you are trying to provide does not exist, this extension will mark the automatic link with a red strikethrough text effect.
+This extension generates link text and title attribute automatically based on the page route provided. If the page file you are trying to provide from the route does not exist, this extension will mark the link with a red strikethrough text effect.
 
 ### Usage
 
 The link syntax is exactly the same as referenced link syntax in Markdown, the only difference is that you need to add a `link:` prefix to the reference ID:
 
-~~~ .markdown
-[‌link:page-one‌] → will be replaced with `[Page Title](http://127.0.0.1/path/to/page-one "Page Title")`
-[‌link text‌][‌link:page-one‌] → will be replaced with `[link text](http://127.0.0.1/path/to/page-one "Page Title")`
-[‌link:does-not-exist‌] → will be replaced with `<s style="color:#f00;" title="[‌link:does-not-exist‌]">broken link</s>`
-~~~
+ - <code>[<span>link:page-123</span>]</code> will be replaced with <code>[<span>Page Title</span>](<span>http</span>://<span>127.0.0.1/path/to/page-123 "Page Title"</span>)</code>.
+ - <code>[<span>link text</span>][<span>link:page-123</span>]</code> will be replaced with <code>[<span>link text</span>](<span>http</span>://<span>127.0.0.1/path/to/page-123 "Page Title"</span>)</code>.
+ - <code>[<span>link:does-not-exist</span>]</code> will be replaced with <code>&lt;s style="color:#f00;" title="[<span>link:does-not-exist</span>]"&gt;broken link&lt;/s&gt;</code>.
 
-All of the page path provided will be parsed relative to in which the page is stored. To go to the upper level of the current page path, you can use `../` pattern:
+All of the page route provided will be parsed relative to in which the page is stored. To go to the upper level of the current page route, you can use `../`:
 
-~~~ .markdown
-[‌link:../blog/page-one‌] → will be replaced with `[Page Title](/path/blog/page-one "Page Title")`
-~~~
+ - <code>[<span>link:../blog/post-123</span>]</code> will be replaced with <code>[<span>Page Title</span>](<span>/path/blog/post-123 "Post Title"</span>)</code>.
