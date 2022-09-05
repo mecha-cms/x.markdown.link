@@ -1,15 +1,14 @@
 <?php namespace x;
 
 function markdown__link($content) {
-    $path = $this->path;
-    if (!$path) {
+    if (!$content || false === \strpos($content, '[link:')) {
+        return $content;
+    }
+    if (!$path = $this->path) {
         return $content;
     }
     $type = $this->type;
     if ('Markdown' !== $type && 'text/markdown' !== $type) {
-        return $content;
-    }
-    if (false === \strpos($content, '[link:')) {
         return $content;
     }
     \extract($GLOBALS, \EXTR_SKIP);
