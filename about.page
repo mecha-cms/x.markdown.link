@@ -1,10 +1,11 @@
 ---
-title: Markdown Smart Internal Links
+title: Markdown Link
 description: Automatically search for internal links.
 icon: 'M20.56 18H3.44C2.65 18 2 17.37 2 16.59V7.41C2 6.63 2.65 6 3.44 6H20.56C21.35 6 22 6.63 22 7.41V16.59C22 17.37 21.35 18 20.56 18M6.81 15.19V11.53L8.73 13.88L10.65 11.53V15.19H12.58V8.81H10.65L8.73 11.16L6.81 8.81H4.89V15.19H6.81M19.69 12H17.77V8.81H15.85V12H13.92L16.81 15.28L19.69 12Z'
 author: Taufik Nurrohman
 type: Markdown
 version: 2.4.6
+
 alert:
   stale:
   - 'This extension is considered obsolete. I recommend you to just use the [Link](https://github.com/mecha-cms/x.link) extension which is more natural and will keep the page data clean even though this extension will be removed eventually when you don’t need it. This extension last updated and known to be compatible with core version 3.0.0. After that, I do not guarantee that I will continue to update this extension. Contributors and users who still consider this extension as a necessary extension are welcome to [update this extension](https://github.com/mecha-cms/x.markdown.link) so that it will remain compatible with newer core versions.'

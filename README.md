@@ -1,5 +1,5 @@
-Markdown Smart Internal Links Extension for [Mecha](https://github.com/mecha-cms/mecha)
-=======================================================================================
+Markdown Link Extension for [Mecha](https://github.com/mecha-cms/mecha)
+=======================================================================
 
 ![Code Size](https://img.shields.io/github/languages/code-size/mecha-cms/x.markdown.link?color=%23444&style=for-the-badge)
 
