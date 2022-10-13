@@ -12,7 +12,7 @@ function markdown__link($content) {
         return $content;
     }
     \extract($GLOBALS, \EXTR_SKIP);
-    return \preg_replace_callback('/(?:\[([^]]*)\])?\[link:((?:\.{2}\/)*|\.{2})([^\s?&#]*)([?&#].*?)?\]/', static function($m) use($path, $url) {
+    return \preg_replace_callback('/(?:\[([^]]*)\])?\[link:((?:\.{2}\/)*|\.{2})([^\s?&#]*)([?&#].*?)?\]/', static function ($m) use ($path, $url) {
         $route = \rtrim(\strtr(\dirname($path) . \D, [
             \LOT . \D . 'page' . \D => ""
         ]), \D);
