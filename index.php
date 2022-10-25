@@ -33,6 +33,10 @@ function markdown__link($content) {
         } else {
             $folder = \LOT . \D . 'page' . \strtr($route . \D . $m[3], '/', D);
         }
+        // Fix case for link(s) that point to a page with pagination offset such as `[link:store/extension/1]`
+        if (\preg_match('/\/([1-9]\d*)$/', $folder) && \is_dir($d = \dirname($folder))) {
+            $folder = $d;
+        }
         $m[4] = $m[4] ?? ""; // This is the query string and hash
         $file = \exist([
             $folder . '.archive',
