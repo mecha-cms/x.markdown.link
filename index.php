@@ -1,6 +1,6 @@
-<?php namespace x;
+<?php namespace x\markdown__link\page;
 
-function markdown__link($content) {
+function content($content) {
     if (!$content || false === \strpos($content, '[link:')) {
         return $content;
     }
@@ -52,7 +52,10 @@ function markdown__link($content) {
     }, $content);
 }
 
-\Hook::set([
-    'page.content',
-    'page.description'
-], __NAMESPACE__ . "\\markdown__link", 1.9); // Make sure to run before `x\markdown` hook
+function description($description) {
+    return \fire(__NAMESPACE__ . "\\content", [$description], $this);
+}
+
+// Make sure to run before `x\markdown\page\*` hook
+\Hook::set('page.content', __NAMESPACE__ . "\\content", 1.9);
+\Hook::set('page.description', __NAMESPACE__ . "\\description", 1.9);
