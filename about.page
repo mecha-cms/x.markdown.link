@@ -21,11 +21,11 @@ effect.
 The link syntax is exactly the same as referenced link syntax in Markdown, the only difference is that you need to add a
 `link:` prefix to the reference ID:
 
- - <code>[<span>link:page-123</span>]</code> will be replaced with <code>[<span>Page Title</span>](<span>http</span>://<span>127.0.0.1/path/to/page-123 "Page Title"</span>)</code>.
- - <code>[<span>link text</span>][<span>link:page-123</span>]</code> will be replaced with <code>[<span>link text</span>](<span>http</span>://<span>127.0.0.1/path/to/page-123 "Page Title"</span>)</code>.
- - <code>[<span>link:does-not-exist</span>]</code> will be replaced with <code>&lt;s style="color:#f00;" title="[<span>link:does-not-exist</span>]"&gt;broken link&lt;/s&gt;</code>.
+ - <code>&#x5b;link:page-123&#x5d;</code> will be replaced with <code>&#x5b;Page Title&#x5d;(http://127.0.0.1/path/to/page-123 "Page Title")</code>.
+ - <code>&#x5b;link text&#x5d;&#x5b;link:page-123&#x5d;</code> will be replaced with <code>&#x5b;link text&#x5d;(http://127.0.0.1/path/to/page-123 "Page Title")</code>.
+ - <code>&#x5b;link:does-not-exist&#x5d;</code> will be replaced with <code>&lt;s style="color:#f00;" title="&#x5b;link:does-not-exist&#x5d;"&gt;broken link&lt;/s&gt;</code>.
 
 All of the page route provided will be parsed relative to in which the page is stored. To go to the upper level of the
 current page route, you can use `../`:
 
- - <code>[<span>link:../blog/post-123</span>]</code> will be replaced with <code>[<span>Page Title</span>](<span>/path/blog/post-123 "Post Title"</span>)</code>.
+ - <code>&#x5b;link:../blog/post-123&#x5d;</code> will be replaced with <code>&#x5b;Page Title&#x5d;(/path/blog/post-123 "Post Title")</code>.
