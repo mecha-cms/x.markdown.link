@@ -1,5 +1,5 @@
 {
-  "abandoned": true,
+  "abandoned": "mecha-cms/x.link",
   "description": "Searches for internal links.",
   "license": "GPL-3.0-or-later",
   "name": "mecha-cms/x.markdown.link",

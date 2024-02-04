@@ -5,7 +5,7 @@ icon: 'M20.56 18H3.44C2.65 18 2 17.37 2 16.59V7.41C2 6.63 2.65 6 3.44 6H20.56C21
 color: '#0f709d'
 author: Taufik Nurrohman
 type: Markdown
-version: 2.4.7
+version: 2.4.8
 
 alert:
   stale:
@@ -23,7 +23,7 @@ The link syntax is exactly the same as referenced link syntax in Markdown, the o
 
  - <code>&#x5b;link:page-123&#x5d;</code> will be replaced with <code>&#x5b;Page Title&#x5d;(http://127.0.0.1/path/to/page-123 "Page Title")</code>.
  - <code>&#x5b;link text&#x5d;&#x5b;link:page-123&#x5d;</code> will be replaced with <code>&#x5b;link text&#x5d;(http://127.0.0.1/path/to/page-123 "Page Title")</code>.
- - <code>&#x5b;link:does-not-exist&#x5d;</code> will be replaced with <code>&lt;s style="color:#f00;" title="&#x5b;link:does-not-exist&#x5d;"&gt;broken link&lt;/s&gt;</code>.
+ - <code>&#x5b;link:does-not-exist&#x5d;</code> will be replaced with <code>&lt;s role="status" style="color: #f00;" title="&#x5b;link:does-not-exist&#x5d;"&gt;broken link&lt;/s&gt;</code>.
 
 All of the page route provided will be parsed relative to in which the page is stored. To go to the upper level of the
 current page route, you can use `../`:

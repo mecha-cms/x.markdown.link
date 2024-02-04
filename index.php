@@ -46,9 +46,11 @@ function page__content($content) {
             return '<s role="status" style="color: #f00;" title="' . ($m[1] ? \i('broken link') : $m[0]) . '">' . ($m[1] ?: \i('broken link')) . '</s>';
         }
         $page = new \Page($file);
-        $title = $page['title'] ?? \To::title(\basename($m[2]));
+        $title_default = \To::title(\basename($m[2]));
+        $title = $page->title ?? $title_default;
+        $title_raw = $page['title'] ?? $title_default;
         $v = \strtr($m[3] ? $url . (0 === \strpos($m[3], '/') ? $m[3] : $route . '/' . $m[3]) . $m[4] . ' "' . \To::text($title) . '"' : $url . $route . $m[4], \D, '/');
-        return '[' . ($m[1] ?: $title) . '](' . $v . ')';
+        return '[' . ($m[1] ?: $title_raw) . '](' . $v . ')';
     }, $content);
 }
 
