@@ -49,7 +49,8 @@ function page__content($content) {
         $title_default = \To::title(\basename($m[2]));
         $title = $page->title ?? $title_default;
         $title_raw = $page['title'] ?? $title_default;
-        $v = \strtr($m[3] ? $url . (0 === \strpos($m[3], '/') ? $m[3] : $route . '/' . $m[3]) . $m[4] . ' "' . \To::text($title) . '"' : $url . $route . $m[4], \D, '/');
+        $children = $page->children ?? false;
+        $v = \strtr($m[3] ? $url . (0 === \strpos($m[3], '/') ? $m[3] : $route . '/' . $m[3]) . ($children && $children->count ? '/1' : "") . $m[4] . ' "' . \To::text($title) . '"' : $url . $route . $m[4], \D, '/');
         return '[' . ($m[1] ?: $title_raw) . '](' . $v . ')';
     }, $content);
 }
